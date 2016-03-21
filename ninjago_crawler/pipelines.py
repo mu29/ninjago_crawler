@@ -17,7 +17,7 @@ class DataStorePipeline(object):
     def process_item(self, item, spider):
         try:
             self.cursor.execute("INSERT INTO videos (title, video_id, minute, thumbnail_url) VALUES (%s, %s, %s, %s)",
-                                (item['title'], item['video_id'], item['minute'], item['thumbnail_url']))
+                                (item['title'].strip(), item['video_id'], item['minute'], item['thumbnail_url']))
             self.conn.commit()
 
         except MySQLdb.Error, e:
